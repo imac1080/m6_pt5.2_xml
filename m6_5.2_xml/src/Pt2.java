@@ -22,6 +22,7 @@ public class Pt2 implements Serializable {
 //			e.printStackTrace();
 //		}
 //	}
+	//s
 
 	public int menuPrincipal() {
 		Scanner teclat = new Scanner(System.in);
