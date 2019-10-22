@@ -42,10 +42,9 @@ public class Pt2 implements Serializable {
 	}
 
 	public static void main(String[] args) throws IOException {
-//		Pt2 x = new Pt2();
+		Pt2 x = new Pt2();
 		Curs[] cursos = new Curs[0];
 		String ruta = "cursos.xml";
-		String id = "";
 		int o = 0;
 		File cd = new File(ruta);
 //		x.carregarDades(cd); // Carreguem les dades que han estat guardades anteriorment
@@ -54,11 +53,13 @@ public class Pt2 implements Serializable {
 			Scanner dades = new Scanner(System.in);
 			switch (o) {
 			case 1:
-				System.out.println("digues el nom de la persona");
-				id = dades.nextLine();
-				System.out.println("digues el cognom de la persona");
-				String cognom = dades.nextLine();
-				System.out.println("digues la edat de la persona");
+				System.out.println("digues el id del curs");
+				String idCurs = dades.nextLine();
+				System.out.println("digues el nom del tutor");
+				String nomTutor = dades.nextLine();
+				System.out.println("digues el cognom del tutor");
+				String cognomTutor = dades.nextLine();
+				Alumne[] alumesArrayVar = new Alumne[0];
 				int identificador = persones.size();
 				identificador++;
 				int edat;
