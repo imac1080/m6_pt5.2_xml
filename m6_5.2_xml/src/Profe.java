@@ -5,6 +5,8 @@ public class Profe {
 
 	public Profe() {
 		super();
+		this.nom = "";
+		this.cognom = "";
 	}
 
 	public Profe(String nom, String cognom) {

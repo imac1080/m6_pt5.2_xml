@@ -44,6 +44,7 @@ public class Pt2 implements Serializable {
 	public static void main(String[] args) throws IOException {
 		Pt2 x = new Pt2();
 		Curs[] cursos = new Curs[0];
+		Curs[] cursos2 = new Curs[0];
 		String ruta = "cursos.xml";
 		int o = 0;
 		File cd = new File(ruta);
@@ -73,7 +74,7 @@ public class Pt2 implements Serializable {
 					String cognomAlumne = dades.nextLine();
 					Alumne[] alumesArrayVar2 = new Alumne[alumesArrayVar.length + 1];
 					for (int i = 0; i < alumesArrayVar.length; i++) {
-						alumesArrayVar2[i]=alumesArrayVar[i];
+						alumesArrayVar2[i] = alumesArrayVar[i];
 					}
 					alumesArrayVar2[alumesArrayVar2.length - 1] = new Alumne(nomAlumne, cognomAlumne);
 					System.out.println("Alumne afegit!");
@@ -81,41 +82,74 @@ public class Pt2 implements Serializable {
 					System.out.println("Vols afegir algun alumne mes?");
 				}
 				Modul[] modulArrayVar = new Modul[0];
-				System.out.println("Digues el id del modul");
-				String idModul = dades.nextLine();
-				System.out.println("Digues el titul del modul");
-				String titulModul = dades.nextLine();
-				System.out.println("Digues el nom d'un professor del modul");
-				String nomProfesor = dades.nextLine();
-				System.out.println("Digues el cognom del professor");
-				String cognomProfesor = dades.nextLine();
-				Profe[] profeArrayVar = new Profe[0];
-				Profe[] profeArrayVar2 = new Profe[0];
-				System.out.println("Vols afegir professor mes??");
-				while (SiNo().equals("SI")) {
-					System.out.println("digues el nom del professor");
+				String nomProfesor = "", cognomProfesor = "";
+				boolean mesModuls = true;
+				while (mesModuls) {
+					System.out.println("Digues el id del modul");
+					String idModul = dades.nextLine();
+					System.out.println("Digues el titul del modul");
+					String titulModul = dades.nextLine();
+					System.out.println("Digues el nom d'un professor del modul");
 					nomProfesor = dades.nextLine();
-					System.out.println("digues el cognom del professor");
+					System.out.println("Digues el cognom del professor");
 					cognomProfesor = dades.nextLine();
-					profeArrayVar2= new Profe[profeArrayVar.length + 1];
-					for (int i = 0; i < profeArrayVar.length; i++) {
-						profeArrayVar2[i]=profeArrayVar[i];
-					}
-					profeArrayVar2[profeArrayVar2.length - 1] = new Profe(nomProfesor, cognomProfesor);
-					System.out.println("Professor afegit!");
-					profeArrayVar = profeArrayVar2;
+					Profe[] profeArrayVar = new Profe[1];
+					profeArrayVar[0] = new Profe(nomProfesor, cognomProfesor);
+					Profe[] profeArrayVar2 = new Profe[0];
 					System.out.println("Vols afegir algun professor mes?");
+					while (SiNo().equals("SI")) {
+						System.out.println("digues el nom del professor");
+						nomProfesor = dades.nextLine();
+						System.out.println("digues el cognom del professor");
+						cognomProfesor = dades.nextLine();
+						profeArrayVar2 = new Profe[profeArrayVar.length + 1];
+						for (int i = 0; i < profeArrayVar.length; i++) {
+							profeArrayVar2[i] = profeArrayVar[i];
+						}
+						profeArrayVar2[profeArrayVar2.length - 1] = new Profe(nomProfesor, cognomProfesor);
+						System.out.println("Professor afegit!");
+						profeArrayVar = profeArrayVar2;
+						System.out.println("Vols afegir algun professor mes?");
+					}
+					Uf[] ufArrayVar = new Uf[0];
+					Uf[] ufArrayVar2 = new Uf[0];
+					System.out.println("Vols afegir alguna unitat formativa?");
+					while (SiNo().equals("SI")) {
+						System.out.println("digues el numero de la unitat formativa");
+						String numeroUF = dades.nextLine();
+						System.out.println("digues el nom de la unitat formativa");
+						String nomUF = dades.nextLine();
+						ufArrayVar2 = new Uf[ufArrayVar.length + 1];
+						for (int i = 0; i < ufArrayVar.length; i++) {
+							ufArrayVar2[i] = ufArrayVar[i];
+						}
+						ufArrayVar2[ufArrayVar2.length - 1] = new Uf(numeroUF, nomUF);
+						System.out.println("Unitat formativa afegit!");
+						ufArrayVar = ufArrayVar2;
+						System.out.println("Vols afegir alguna unitat formativa mes?");
+					}
+					Modul[] modulArrayVar2 = new Modul[modulArrayVar.length + 1];
+					for (int i = 0; i < modulArrayVar.length; i++) {
+						modulArrayVar2[i] = modulArrayVar[i];
+					}
+					modulArrayVar2[modulArrayVar2.length - 1] = new Modul(idModul, titulModul, profeArrayVar,
+							ufArrayVar);
+					System.out.println("Modul afegit!");
+					modulArrayVar = modulArrayVar2;
+					System.out.println("Vols afegir mes moduls?");
+					if (SiNo().equals("NO")) {
+						mesModuls = false;
+					}
 				}
-//				int identificador = persones.size();
-//				identificador++;
-				int edat;
-				if (dades.hasNextInt()) {
-					edat = dades.nextInt();
-//					x.persones.put(identificador, new Persona(id, cognom, edat));
-//					System.out.println("La persona" + id + " " + cognom + " ha estat creada");
-//					System.out.println("HIHAN " + x.persones.size() + " PERSONES");
-				} else
-					System.out.println("Error no s'ha creat, error de edat");
+				cursos2 = new Curs[cursos.length + 1];
+				for (int i = 0; i < cursos.length; i++) {
+					cursos2[i] = cursos[i];
+				}
+				cursos2[cursos2.length - 1] = new Curs(idCurs, new Profe(nomProfesor, cognomProfesor), alumesArrayVar,
+						modulArrayVar);
+				cursos = cursos2;
+				System.out.println("El curs " + idCurs + " ha estat creat");
+				System.out.println("Hi han " + cursos.length + " cursos");
 				break;
 			case 2:
 				try {
@@ -123,30 +157,79 @@ public class Pt2 implements Serializable {
 					DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 					Document doc = dBuilder.newDocument();
 					// root element
-					Element rootElement = doc.createElement("persones");
+					Element rootElement = doc.createElement("cursos");
 					doc.appendChild(rootElement);
-//					for (int i = 1; i <= persones.size(); i++) {
-						Element departamento = doc.createElement("persona");
+					for (int i = 0; i <= cursos.length; i++) {
+						Element departamento = doc.createElement("curs");
 						rootElement.appendChild(departamento);
-						// nombre
-						Element nombre = doc.createElement("nombre");
-						departamento.appendChild(nombre);
-//						nombre.appendChild(doc.createTextNode(persones.get(i).getNombre()));
-						// apellido
-						nombre = doc.createElement("apellido");
-						departamento.appendChild(nombre);
-//						nombre.appendChild(doc.createTextNode(persones.get(i).getApellido()));
-						// edad
-						nombre = doc.createElement("edad");
-						departamento.appendChild(nombre);
-//						nombre.appendChild(doc.createTextNode(String.valueOf(persones.get(i).getEdad())));
-//					}
+						// attr
+						Attr attr = doc.createAttribute("id");
+						attr.setValue(cursos[i].getId());
+						departamento.setAttributeNode(attr);
+						// tutor
+						if (!cursos[i].getTutor().nom.equals("")) {
+							Element tutor = doc.createElement("tutor");
+							departamento.appendChild(tutor);
+							tutor.appendChild(
+									doc.createTextNode(cursos[i].getTutor().cognom + ", " + cursos[i].getTutor().nom));
+						}
+						// alumnes
+						if (cursos[i].getAlumesArray().length != 0) {
+							Element alumnes = doc.createElement("alumnes");
+							departamento.appendChild(alumnes);
+							for (int j = 0; j < cursos[i].getAlumesArray().length; j++) {
+								Element alumne = doc.createElement("alumne");
+								alumnes.appendChild(alumne);
+								alumne.appendChild(doc.createTextNode(cursos[i].getAlumesArray()[j].getCognom() + ", "
+										+ cursos[i].getAlumesArray()[j].getNom()));
+							}
+						}
+						Element moduls = doc.createElement("moduls");
+						departamento.appendChild(moduls);
+						for (int j = 0; j < cursos[i].getModulArray().length; j++) {
+							Element modul = doc.createElement("modul");
+							moduls.appendChild(modul);
+							// attr modul
+							Attr attrModul = doc.createAttribute("id");
+							attrModul.setValue(cursos[i].getModulArray()[j].getId());
+							modul.setAttributeNode(attrModul);
+							// titol modul
+							Element titolModul = doc.createElement("titol");
+							modul.appendChild(titolModul);
+							titolModul.appendChild(doc.createTextNode(cursos[i].getModulArray()[j].getTitol()));
+							// profes
+							Element profesModul = doc.createElement("profes");
+							modul.appendChild(profesModul);
+							for (int k = 0; k < cursos[i].getModulArray()[j].getProfeArray().length; k++) {
+								Element profeModul = doc.createElement("profe");
+								profesModul.appendChild(profeModul);
+								profeModul.appendChild(
+										doc.createTextNode(cursos[i].getModulArray()[j].getProfeArray()[k].getCognom()
+												+ ", " + cursos[i].getModulArray()[j].getProfeArray()[k].getNom()));
+							}
+							// ufs
+							Element ufssModul = doc.createElement("ufs");
+							modul.appendChild(ufssModul);
+							if (cursos[i].getModulArray()[j].getUfArray().length != 0) {
+								for (int k = 0; k < cursos[i].getModulArray()[j].getUfArray().length; k++) {
+									Element ufModul = doc.createElement("uf");
+									ufssModul.appendChild(ufModul);
+									// attr uf
+									Attr attrUf = doc.createAttribute("n");
+									attrUf.setValue(cursos[i].getModulArray()[j].getUfArray()[k].getN());
+									ufModul.setAttributeNode(attrUf);
+									ufModul.appendChild(
+											doc.createTextNode(cursos[i].getModulArray()[j].getUfArray()[k].getNom()));
+								}
+							}
+						}
+					}
 
 					// write the content into xml file
 					TransformerFactory transformerFactory = TransformerFactory.newInstance();
 					Transformer transformer = transformerFactory.newTransformer();
 					DOMSource source = new DOMSource(doc);
-					StreamResult result = new StreamResult(new File("persones.xml"));
+					StreamResult result = new StreamResult(new File("cursos.xml"));
 					transformer.transform(source, result);
 					// Output to console for testing
 					StreamResult consoleResult = new StreamResult(System.out);
@@ -154,7 +237,7 @@ public class Pt2 implements Serializable {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println("guardat a persones.xml");
+				System.out.println("guardat a cursos.xml");
 				break;
 			case 3:
 				try {
@@ -187,6 +270,7 @@ public class Pt2 implements Serializable {
 			}
 		} while (o < 5);
 		System.out.println("S'HA ACABAT");
+
 	}
 
 	public static String SiNo() {

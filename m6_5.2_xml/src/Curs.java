@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Curs implements Serializable {
 	private String id;
-	private String tutor;
+	private Profe tutor;
 	private Alumne[] alumesArray = new Alumne[0];
 	private Modul[] modulArray = new Modul[0];
 
@@ -12,7 +12,7 @@ public class Curs implements Serializable {
 		super();
 	}
 
-	public Curs(String id, String tutor, Alumne[] alumesArray, Modul[] modulArray) {
+	public Curs(String id, Profe tutor, Alumne[] alumesArray, Modul[] modulArray) {
 		super();
 		this.id = id;
 		this.tutor = tutor;
@@ -28,11 +28,11 @@ public class Curs implements Serializable {
 		this.id = id;
 	}
 
-	public String getTutor() {
+	public Profe getTutor() {
 		return tutor;
 	}
 
-	public void setTutor(String tutor) {
+	public void setTutor(Profe tutor) {
 		this.tutor = tutor;
 	}
 
